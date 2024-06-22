@@ -1,0 +1,26 @@
+version: '3'
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    ports:
+      - "81:80"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
+      - .:/var/www
+  nodejs:
+    restart: always
+    build: .
+    command: ["./start.sh",]
+    volumes:
+      - .:/usr/src/app
+  mongodb:
+    restart: always
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/data/db

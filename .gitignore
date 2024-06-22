@@ -1,0 +1,10 @@
+node_modules
+# Keep environment variables out of version control
+.env
+data/
+.idea/
+.vscode/
+localbot
+config/localbot-404211-59f1c12dd198.json
+./storage/*
+./*/*.log
