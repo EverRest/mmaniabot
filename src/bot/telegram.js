@@ -13,7 +13,7 @@ const db = new SQLiteDB(config.dbPath);
 bot.on('channel_post',
     (msg) => {
         const chatId = msg.chat.id;
-        // console.log(chatId);
+        console.log(chatId);
     });
 
 bot.on('callback_query', async (callbackQuery) => {
