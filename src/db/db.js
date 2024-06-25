@@ -1,3 +1,4 @@
+const storage = require('../storage/storage');
 const sqlite3 = require('sqlite3').verbose();
 
 class SQLiteDB {
@@ -46,7 +47,7 @@ class SQLiteDB {
 
     async createPost(msg_id = null, fileName, filePath, fileSize, mime, extension) {
         try {
-            let q = await this.db.run(`INSERT INTO posts(msg_id, fileName, filePath, fileSize, mime, extension) VALUES(?, ?, ?, ?, ?, ?)`, [msg_id, fileName, filePath, fileSize, mime, extension]);
+            await this.db.run(`INSERT INTO posts(msg_id, fileName, filePath, fileSize, mime, extension) VALUES(?, ?, ?, ?, ?, ?)`, [msg_id, fileName, filePath, fileSize, mime, extension]);
         } catch (err) {
             console.error(err.message);
         }
@@ -85,6 +86,7 @@ class SQLiteDB {
         try {
             await this.createPost(null, fileName, filePath, fileSize, mime, extension);
         } catch (err) {
+            storage.deleteFile(fileName);
             console.error(err.message);
         }
     }

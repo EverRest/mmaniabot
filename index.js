@@ -7,7 +7,6 @@ const cron = require('node-cron');
 const winston = require('winston');
 const utils = require('./src/utils/utils');
 const express = require('express');
-const {Readable} = require('stream');
 const SQLiteDB = require('./src/db/db');
 const db = new SQLiteDB(config.dbPath);
 
@@ -43,7 +42,7 @@ app.listen(port, () => {
     logger.info(`Server is running on port ${port}`);
 });
 
-cron.schedule('*/30 * * * *', async () => {
+cron.schedule('*/60 * * * *', async () => {
     try {
         await utils.sendRandomFileFromStorage();
     } catch (error) {
